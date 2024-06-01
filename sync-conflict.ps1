@@ -4,7 +4,10 @@
 # *.sync-conflict-*
 
 Write-Host "Syncthing conflict check..."
-Write-Host ""
+Write-Host "Sleeping for 2 minutes"
+
+# Start-Sleep -Seconds (2 * 60)
+timeout 120
 
 $paths = @("c:\Users\markosf\1progs\1sync", "c:\bac")
 # $paths = @("c:\bac")
@@ -37,6 +40,7 @@ $filteredLogs = Get-Content $logFilePath |
 # Output the filtered log entries
 $filteredLogs | Write-Output
 if ($filteredLogs) {
+  Start-Process "http://127.0.0.1:8384/"
   "Press any key to exit..."
   $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") | Out-Null
 }
